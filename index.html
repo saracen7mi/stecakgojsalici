@@ -167,13 +167,12 @@ document.getElementById('tur-button').addEventListener('click', () => playAudio(
  -->
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STECAK U GOJSALICIMA U KLADANJU</title>
+    <title>STEĆAK U GOJSALIĆIMA U KLADNJU</title>
     <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <style>
@@ -191,6 +190,7 @@ document.getElementById('tur-button').addEventListener('click', () => playAudio(
     </style>
 </head>
 <body>
+    <!-- Audio fajlovi -->
     <audio id="audio-bosnian" preload="auto">
         <source src="https://raw.githubusercontent.com/saracen7mi/stecakgojsalici/main/stecakgojsalicibosanski.mp3" type="audio/mpeg">
     </audio>
@@ -206,8 +206,13 @@ document.getElementById('tur-button').addEventListener('click', () => playAudio(
     <audio id="audio-turkish" preload="auto">
         <source src="https://raw.githubusercontent.com/saracen7mi/stecakgojsalici/main/stecakgojsaliciturski.mp3" type="audio/mpeg">
     </audio>
+
+    <!-- AR scena -->
     <a-scene embedded arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;">
+        <!-- Pozadina -->
         <a-plane color="#008000" height="3.5" width="6.5" position="0 0.5 -5" opacity="0.9"></a-plane>
+
+        <!-- 3D modeli -->
         <a-entity 
             gltf-model="https://cdn.jsdelivr.net/gh/saracen7mi/stecakgojsalici@main/grbOpstine.glb" 
             position="-2 1 -5" 
@@ -215,6 +220,7 @@ document.getElementById('tur-button').addEventListener('click', () => playAudio(
             rotation="0 240 0" 
             animation="property: rotation; to: 0 360 0; loop: true; dur: 5000">
         </a-entity>
+
         <a-entity 
             gltf-model="https://cdn.jsdelivr.net/gh/saracen7mi/stecakgojsalici@main/grbdrzave3d.glb" 
             position="2 1 -5" 
@@ -222,61 +228,51 @@ document.getElementById('tur-button').addEventListener('click', () => playAudio(
             rotation="0 240 0" 
             animation="property: rotation; to: 0 360 0; loop: true; dur: 5000">
         </a-entity>
+
+        <!-- Dugmad za jezike -->
         <a-entity id="eng-button" geometry="primitive: plane; height: 0.5; width: 1.5"
                   material="color: red" position="-2.5 2 -4.9"
                   text="value: ENG; color: white; align: center; width: 3;"
-                  class="clickable">
-        </a-entity>
+                  class="clickable"></a-entity>
+
         <a-entity id="deu-button" geometry="primitive: plane; height: 0.5; width: 1.5"
                   material="color: yellow" position="-1 2 -4.9"
                   text="value: DEU; color: black; align: center; width: 3;"
-                  class="clickable">
-        </a-entity>
+                  class="clickable"></a-entity>
+
         <a-entity id="ita-button" geometry="primitive: plane; height: 0.5; width: 1.5"
                   material="color: blue" position="0.5 2 -4.9"
                   text="value: ITA; color: white; align: center; width: 3;"
-                  class="clickable">
-        </a-entity>
+                  class="clickable"></a-entity>
+
         <a-entity id="tur-button" geometry="primitive: plane; height: 0.5; width: 1.5"
                   material="color: brown" position="2 2 -4.9"
                   text="value: TUR; color: white; align: center; width: 3;"
-                  class="clickable">
-        </a-entity>
+                  class="clickable"></a-entity>
+
+        <!-- Tekstualni opis -->
         <a-entity position="0 0.8 -4.9">
-            <a-text value=" U naselju Gojsalici, u samom centru, s desne strane puta na manjem uzvisenju, nalazi se nekropola sa steccima koja svjedoci o bogatoj istoriji ovog podrucja. Ova nekropola, koja broji cetrdeset i osam stecaka, jedna je od bolje ocuvanih u okolini, sa informacijama na postavljenoj tabli. Iako je parcela uredjena, mnogi stecci su osteceni, utonuli u zemlju ili obrastali niskim rastinjem, sto ukazuje na to da su se ljudi na ovom prostoru naseljavali jos u srednjem veku. Na ovoj nekropoli, medjutim, jedan od stecaka se izdvaja po motivu maca na krovnoj ploci, dok je postolje gotovo potpuno utonulo. Jedan od najimpresivnijih stecaka na ovom lokalitetu je sljemenjak velikih dimenzija, njegovoj ceonoj zapadnoj strani nalazi se motiv polumjeseca sa krakovima okrenutim prema zemlji, dok na krovu dominira zig-zag vrpca. Ovi stecci ne samo da su kulturno nasledje, vec i jasni dokazi da je Kladanj bio naseljen i u proslim vremenima, ostavljajuci tragove svog istorijskog identiteta. "
-                    color="#FFFF00" width="5.5" wrap-count="50" align="center" scale="0.5 0.5 0.5">
+            <a-text value="U naselju Gojsalici, u samom centru, s desne strane puta na manjem uzvisenju, nalazi se nekropola sa steccima koja svjedoci o bogatoj istoriji ovog podrucja. Ova nekropola, koja broji cetrdeset i osam stecaka, jedna je od bolje ocuvanih u okolini, sa informacijama na postavljenoj tabli. Iako je parcela uredjena, mnogi stecci su osteceni, utonuli u zemlju ili obrastali niskim rastinjem, sto ukazuje na to da su se ljudi na ovom prostoru naseljavali jos u srednjem veku. Na ovoj nekropoli, medjutim, jedan od stecaka se izdvaja po motivu maca na krovnoj ploci, dok je postolje gotovo potpuno utonulo. Jedan od najimpresivnijih stecaka na ovom lokalitetu je sljemenjak velikih dimenzija, njegovoj ceonoj zapadnoj strani nalazi se motiv polumjeseca sa krakovima okrenutim prema zemlji, dok na krovu dominira zig-zag vrpca. Ovi stecci ne samo da su kulturno nasledje, vec i jasni dokazi da je Kladanj bio naseljen i u proslim vremenima, ostavljajuci tragove svog istorijskog identiteta."
+                     color="#FFFF00" width="5.5" wrap-count="50" align="center" scale="0.5 0.5 0.5">
             </a-text>
         </a-entity>
+
+        <!-- Google Maps dugme -->
         <a-entity position="0 -0.8 -4.9" id="location-link" class="clickable">
-            <a-text 
-                value="Lokacija:" 
-                position="-2 0 0.05" 
-                color="#000000"
-                align="center"
-                scale="1.2 1.4 1.4"
-                letter-spacing="1">
-            </a-text>
-            <a-plane 
-                color="#FF0000" 
-                height="0.5" 
-                width="1.6" 
-                opacity="0.5" 
-                position="-0.3 0 0.06">
-            </a-plane>
-            <a-text 
-                value="Klikni ovde" 
-                position="-0.4 0 0.06"  
-                color="#000000"
-                align="center"
-                scale="1.2 1.2 1.2" 
-                letter-spacing="1"
-                class="clickable">
-            </a-text>
+            <a-text value="Lokacija:" position="-2 0 0.05" color="#000000" align="center"
+                    scale="1.2 1.4 1.4" letter-spacing="1"></a-text>
+            <a-plane color="#FF0000" height="0.5" width="1.6" opacity="0.5" position="-0.3 0 0.06"></a-plane>
+            <a-text value="Klikni ovde" position="-0.4 0 0.06" color="#000000" align="center"
+                    scale="1.2 1.2 1.2" letter-spacing="1" class="clickable"></a-text>
         </a-entity>
+
+        <!-- Kamera -->
         <a-entity camera look-controls position="0 0 0" fov="85">
             <a-cursor color="#FF0000" radius="0.05"></a-cursor>
         </a-entity>
     </a-scene>
+
+    <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const bosnianAudio = document.getElementById('audio-bosnian');
@@ -288,38 +284,33 @@ document.getElementById('tur-button').addEventListener('click', () => playAudio(
 
             const stopAllAudio = () => {
                 audios.forEach(audio => {
-                    if (audio) {
-                        audio.pause();
-                        audio.currentTime = 0;
-                    }
+                    audio.pause();
+                    audio.currentTime = 0;
                 });
             };
 
             const playAudio = (audioElement) => {
                 if (!audioElement || !audioElement.src) {
-                    console.warn('Audio element nije definisan ili nema izvor:', audioElement?.id);
+                    console.warn('Audio nije dostupan:', audioElement?.id);
                     return;
                 }
                 stopAllAudio();
                 audioElement.play().then(() => {
-                    console.log('Audio pokrenut:', audioElement.id);
+                    console.log('Reprodukcija audio:', audioElement.id);
                 }).catch(error => {
-                    console.error('Greška pri reprodukciji audio:', audioElement.id, error);
+                    console.error('Greška pri reprodukciji:', error);
                 });
             };
 
-            // Play Bosnian audio after first user interaction
             const playBosnianOnInteraction = () => {
-                if (bosnianAudio && bosnianAudio.paused) {
-                    playAudio(bosnianAudio);
-                }
+                if (bosnianAudio.paused) playAudio(bosnianAudio);
                 document.removeEventListener('click', playBosnianOnInteraction);
                 document.removeEventListener('touchstart', playBosnianOnInteraction);
             };
             document.addEventListener('click', playBosnianOnInteraction, { once: true });
             document.addEventListener('touchstart', playBosnianOnInteraction, { once: true });
 
-            // Set up click events for language buttons
+            // Dugmad za jezike
             const buttons = {
                 'eng-button': englishAudio,
                 'deu-button': germanAudio,
@@ -327,54 +318,31 @@ document.getElementById('tur-button').addEventListener('click', () => playAudio(
                 'tur-button': turkishAudio
             };
 
-            Object.keys(buttons).forEach(buttonId => {
-                const button = document.querySelector(`#${buttonId}`);
-                if (button) {
-                    button.addEventListener('click', () => {
-                        playAudio(buttons[buttonId]);
-                    });
-                } else {
-                    console.warn(`Button with ID ${buttonId} not found`);
+            Object.keys(buttons).forEach(id => {
+                const btn = document.getElementById(id);
+                if (btn) {
+                    btn.addEventListener('click', () => playAudio(buttons[id]));
                 }
             });
 
-            // Location link
-            const locationLink = document.querySelector('#location-link');
+            // Link za Google Maps
+            const locationLink = document.getElementById('location-link');
             if (locationLink) {
                 locationLink.addEventListener('click', () => {
                     window.location.href = 'https://www.google.com/maps/dir/?api=1&destination=44.260281488474156,18.728171669452628&travelmode=driving';
                 });
             }
 
-            // Diagnostics for models
+            // Dijagnostika modela
             document.querySelectorAll('a-entity[gltf-model]').forEach(entity => {
                 entity.addEventListener('model-loaded', () => {
                     console.log('Model učitan:', entity.getAttribute('gltf-model'));
                 });
                 entity.addEventListener('model-error', (e) => {
-                    console.error('Greška pri učitavanju modela:', e.detail, entity.getAttribute('gltf-model'));
+                    console.error('Greška pri modelu:', e.detail);
                 });
-            });
-
-            // Diagnostics for audio
-            audios.forEach(audio => {
-                if (audio) {
-                    audio.addEventListener('loadeddata', () => {
-                        console.log('Audio učitan:', audio.id);
-                    });
-                    audio.addEventListener('error', (e) => {
-                        console.error('Greška pri učitavanju audio:', audio.id, e);
-                    });
-                }
             });
         });
     </script>
 </body>
 </html>
-
-
-
-
-
-
- 
