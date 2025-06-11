@@ -185,6 +185,9 @@ document.getElementById('tur-button').addEventListener('click', () => playAudio(
             width: 100%;
             height: 100vh;
         }
+        .clickable {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -275,79 +278,99 @@ document.getElementById('tur-button').addEventListener('click', () => playAudio(
         </a-entity>
     </a-scene>
     <script>
-        AFRAME.registerComponent('audio-control', {
-            init: function () {
-                let bosnianAudio = document.getElementById('audio-bosnian');
-                let englishAudio = document.getElementById('audio-english');
-                let germanAudio = document.getElementById('audio-german');
-                let italianAudio = document.getElementById('audio-italian');
-                let turkishAudio = document.getElementById('audio-turkish');
-                let audios = [bosnianAudio, englishAudio, germanAudio, italianAudio, turkishAudio];
+        document.addEventListener('DOMContentLoaded', () => {
+            const bosnianAudio = document.getElementById('audio-bosnian');
+            const englishAudio = document.getElementById('audio-english');
+            const germanAudio = document.getElementById('audio-german');
+            const italianAudio = document.getElementById('audio-italian');
+            const turkishAudio = document.getElementById('audio-turkish');
+            const audios = [bosnianAudio, englishAudio, germanAudio, italianAudio, turkishAudio];
 
-                const stopAllAudio = () => {
-                    audios.forEach(audio => {
+            const stopAllAudio = () => {
+                audios.forEach(audio => {
+                    if (audio) {
                         audio.pause();
                         audio.currentTime = 0;
-                    });
-                };
-
-                const playAudio = (audioElement) => {
-                    if (!audioElement || !audioElement.src) {
-                        console.warn('Audio element nije definisan ili nema izvor.');
-                        return;
                     }
-                    stopAllAudio();
-                    audioElement.play().then(() => {
-                        console.log('Audio pokrenut:', audioElement.id);
-                    }).catch(error => {
-                        console.warn('Reprodukcija nije uspjela:', error);
+                });
+            };
+
+            const playAudio = (audioElement) => {
+                if (!audioElement || !audioElement.src) {
+                    console.warn('Audio element nije definisan ili nema izvor:', audioElement?.id);
+                    return;
+                }
+                stopAllAudio();
+                audioElement.play().then(() => {
+                    console.log('Audio pokrenut:', audioElement.id);
+                }).catch(error => {
+                    console.error('Greška pri reprodukciji audio:', audioElement.id, error);
+                });
+            };
+
+            // Play Bosnian audio after first user interaction
+            const playBosnianOnInteraction = () => {
+                if (bosnianAudio && bosnianAudio.paused) {
+                    playAudio(bosnianAudio);
+                }
+                document.removeEventListener('click', playBosnianOnInteraction);
+                document.removeEventListener('touchstart', playBosnianOnInteraction);
+            };
+            document.addEventListener('click', playBosnianOnInteraction, { once: true });
+            document.addEventListener('touchstart', playBosnianOnInteraction, { once: true });
+
+            // Set up click events for language buttons
+            const buttons = {
+                'eng-button': englishAudio,
+                'deu-button': germanAudio,
+                'ita-button': italianAudio,
+                'tur-button': turkishAudio
+            };
+
+            Object.keys(buttons).forEach(buttonId => {
+                const button = document.querySelector(`#${buttonId}`);
+                if (button) {
+                    button.addEventListener('click', () => {
+                        playAudio(buttons[buttonId]);
                     });
-                };
+                } else {
+                    console.warn(`Button with ID ${buttonId} not found`);
+                }
+            });
 
-                // Play Bosnian audio after user interaction
-                document.body.addEventListener('click', () => {
-                    if (bosnianAudio.paused) {
-                        playAudio(bosnianAudio);
-                    }
-                }, { once: true });
-
-                // Set up click events for language buttons
-                this.el.sceneEl.querySelector('#eng-button').addEventListener('click', () => playAudio(englishAudio));
-                this.el.sceneEl.querySelector('#deu-button').addEventListener('click', () => playAudio(germanAudio));
-                this.el.sceneEl.querySelector('#ita-button').addEventListener('click', () => playAudio(italianAudio));
-                this.el.sceneEl.querySelector('#tur-button').addEventListener('click', () => playAudio(turkishAudio));
-                this.el.sceneEl.querySelector('#location-link').addEventListener('click', () => {
+            // Location link
+            const locationLink = document.querySelector('#location-link');
+            if (locationLink) {
+                locationLink.addEventListener('click', () => {
                     window.location.href = 'https://www.google.com/maps/dir/?api=1&destination=44.260281488474156,18.728171669452628&travelmode=driving';
                 });
+            }
 
-                // Diagnostics for models
-                document.querySelectorAll('a-entity[gltf-model]').forEach(entity => {
-                    entity.addEventListener('model-loaded', () => {
-                        console.log('Model učitan:', entity.getAttribute('gltf-model'));
-                    });
-                    entity.addEventListener('model-error', (e) => {
-                        console.error('Greška pri učitavanju modela:', e.detail, entity.getAttribute('gltf-model'));
-                    });
+            // Diagnostics for models
+            document.querySelectorAll('a-entity[gltf-model]').forEach(entity => {
+                entity.addEventListener('model-loaded', () => {
+                    console.log('Model učitan:', entity.getAttribute('gltf-model'));
                 });
+                entity.addEventListener('model-error', (e) => {
+                    console.error('Greška pri učitavanju modela:', e.detail, entity.getAttribute('gltf-model'));
+                });
+            });
 
-                // Diagnostics for audio
-                audios.forEach(audio => {
+            // Diagnostics for audio
+            audios.forEach(audio => {
+                if (audio) {
                     audio.addEventListener('loadeddata', () => {
                         console.log('Audio učitan:', audio.id);
                     });
                     audio.addEventListener('error', (e) => {
                         console.error('Greška pri učitavanju audio:', audio.id, e);
                     });
-                });
-            }
+                }
+            });
         });
-
-        // Attach audio-control component to the scene
-        document.querySelector('a-scene').setAttribute('audio-control', '');
     </script>
 </body>
 </html>
-
 
 
 
