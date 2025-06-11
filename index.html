@@ -25,7 +25,7 @@
         <source src="https://raw.githubusercontent.com/saracen7mi/stecakgojsalici/main/stecakgojsaliciengleski.mp3" type="audio/mpeg">
     </audio>
     <audio id="audio-german">
-        <source src=" https://raw.githubusercontent.com/saracen7mi/stecakgojsalici/main/stecakgojsalicinjemacki.mp3" type="audio/mpeg">
+        <source src="https://raw.githubusercontent.com/saracen7mi/stecakgojsalici/main/stecakgojsalicinjemacki.mp3" type="audio/mpeg">
     </audio>
     <audio id="audio-italian">
         <source src="https://raw.githubusercontent.com/saracen7mi/stecakgojsalici/main/stecakgojsaliciitalijanski.mp3" type="audio/mpeg">
@@ -124,10 +124,15 @@
                 console.warn('Reprodukcija nije uspjela:', error);
             });
         }
-        document.getElementById('eng-button').addEventListener('mouseenter', () => playAudio(englishAudio));
-        document.getElementById('deu-button').addEventListener('mouseenter', () => playAudio(germanAudio));
-        document.getElementById('ita-button').addEventListener('mouseenter', () => playAudio(italianAudio));
-        document.getElementById('tur-button').addEventListener('mouseenter', () => playAudio(turkishAudio));
+        // document.getElementById('eng-button').addEventListener('mouseenter', () => playAudio(englishAudio));
+        // document.getElementById('deu-button').addEventListener('mouseenter', () => playAudio(germanAudio));
+        // document.getElementById('ita-button').addEventListener('mouseenter', () => playAudio(italianAudio));
+        // document.getElementById('tur-button').addEventListener('mouseenter', () => playAudio(turkishAudio));
+document.getElementById('eng-button').addEventListener('click', () => playAudio(englishAudio));
+document.getElementById('deu-button').addEventListener('click', () => playAudio(germanAudio));
+document.getElementById('ita-button').addEventListener('click', () => playAudio(italianAudio));
+document.getElementById('tur-button').addEventListener('click', () => playAudio(turkishAudio));
+        
         window.addEventListener('load', () => {
             document.body.addEventListener('click', () => {
                 if (bosnianAudio.paused) {
