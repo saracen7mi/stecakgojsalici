@@ -273,7 +273,7 @@ document.getElementById('tur-button').addEventListener('click', () => playAudio(
     </a-scene>
 
     <!-- JavaScript -->
-    <script>
+<!--     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const bosnianAudio = document.getElementById('audio-bosnian');
             const englishAudio = document.getElementById('audio-english');
@@ -343,6 +343,70 @@ document.getElementById('tur-button').addEventListener('click', () => playAudio(
                 });
             });
         });
-    </script>
+    </script> -->
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const bosnianAudio = document.getElementById('audio-bosnian');
+    const englishAudio = document.getElementById('audio-english');
+    const germanAudio = document.getElementById('audio-german');
+    const italianAudio = document.getElementById('audio-italian');
+    const turkishAudio = document.getElementById('audio-turkish');
+    const audios = [bosnianAudio, englishAudio, germanAudio, italianAudio, turkishAudio];
+
+    const stopAllAudio = () => {
+      audios.forEach(aud => {
+        aud.pause();
+        aud.currentTime = 0;
+      });
+    };
+
+    const playAudio = (aud) => {
+      if (!aud || !aud.src) return console.warn('Bez audio fajla:', aud);
+      stopAllAudio();
+      aud.play().catch(e => console.error('Greška:', e));
+    };
+
+    const playBosnianOnInteraction = () => {
+      if (bosnianAudio.paused) playAudio(bosnianAudio);
+      document.body.removeEventListener('click', playBosnianOnInteraction);
+      document.body.removeEventListener('touchstart', playBosnianOnInteraction);
+    };
+
+    // OGROMNO VAŽNO: slušamo BOD SINČE KAD je DOM spreman:
+    document.body.addEventListener('click', playBosnianOnInteraction);
+    document.body.addEventListener('touchstart', playBosnianOnInteraction);
+
+    // Ostala jezika:
+    const buttons = {
+      'eng-button': englishAudio,
+      'deu-button': germanAudio,
+      'ita-button': italianAudio,
+      'tur-button': turkishAudio
+    };
+    Object.entries(buttons).forEach(([id, aud]) => {
+      const btn = document.getElementById(id);
+      if (btn) {
+        btn.classList.add('clickable');
+        btn.addEventListener('click', () => playAudio(aud));
+      }
+    });
+
+    // Maps link
+    const loc = document.getElementById('location-link');
+    if (loc) loc.addEventListener('click', () => {
+      window.location.href = 'https://www.google.com/maps/dir/?api=1&destination=44.260281488474156,18.728171669452628&travelmode=driving';
+    });
+  });
+</script>
+
+
+
+
+
+
+
+    
 </body>
 </html>
