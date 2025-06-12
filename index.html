@@ -170,243 +170,137 @@ document.getElementById('tur-button').addEventListener('click', () => playAudio(
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STEĆAK U GOJSALIĆIMA U KLADNJU</title>
-    <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-        a-scene {
-            width: 100%;
-            height: 100vh;
-        }
-        .clickable {
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STEĆAK U GOJSALIĆIMA U KLADNJU</title>
+  <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    a-scene { width: 100%; height: 100vh; }
+    .clickable { cursor: pointer; }
+  </style>
 </head>
 <body>
-    <!-- Audio fajlovi -->
-    <audio id="audio-bosnian" preload="auto">
-        <source src="https://raw.githubusercontent.com/saracen7mi/stecakgojsalici/main/stecakgojsalicibosanski.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="audio-english" preload="auto">
-        <source src="https://raw.githubusercontent.com/saracen7mi/stecakgojsalici/main/stecakgojsaliciengleski.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="audio-german" preload="auto">
-        <source src="https://raw.githubusercontent.com/saracen7mi/stecakgojsalici/main/stecakgojsalicinjemacki.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="audio-italian" preload="auto">
-        <source src="https://raw.githubusercontent.com/saracen7mi/stecakgojsalici/main/stecakgojsaliciitalijanski.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="audio-turkish" preload="auto">
-        <source src="https://raw.githubusercontent.com/saracen7mi/stecakgojsalici/main/stecakgojsaliciturski.mp3" type="audio/mpeg">
-    </audio>
+  <!-- Audio fajlovi -->
+  <audio id="audio-bosnian" preload="auto">
+    <source src="https://raw.githubusercontent.com/saracen7mi/stecakgojsalici/main/stecakgojsalicibosanski.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="audio-english" preload="auto">
+    <source src="https://raw.githubusercontent.com/saracen7mi/stecakgojsalici/main/stecakgojsaliciengleski.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="audio-german" preload="auto">
+    <source src="https://raw.githubusercontent.com/saracen7mi/stecakgojsalici/main/stecakgojsalicinjemacki.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="audio-italian" preload="auto">
+    <source src="https://raw.githubusercontent.com/saracen7mi/stecakgojsalici/main/stecakgojsaliciitalijanski.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="audio-turkish" preload="auto">
+    <source src="https://raw.githubusercontent.com/saracen7mi/stecakgojsalici/main/stecakgojsaliciturski.mp3" type="audio/mpeg">
+  </audio>
 
-    <!-- AR scena -->
-    <a-scene embedded arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;">
-        <!-- Pozadina -->
-        <a-plane color="#008000" height="3.5" width="6.5" position="0 0.5 -5" opacity="0.9"></a-plane>
+  <a-scene embedded arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;">
+    <!-- Pozadina -->
+    <a-plane color="#008000" height="3.5" width="6.5" position="0 0.5 -5" opacity="0.9"></a-plane>
 
-        <!-- 3D modeli -->
-        <a-entity 
-            gltf-model="https://cdn.jsdelivr.net/gh/saracen7mi/stecakgojsalici@main/grbOpstine.glb" 
-            position="-2 1 -5" 
-            scale="1 1 1" 
-            rotation="0 240 0" 
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 5000">
-        </a-entity>
+    <!-- GLTF modeli -->
+    <a-entity gltf-model="https://cdn.jsdelivr.net/gh/saracen7mi/stecakgojsalici@main/grbOpstine.glb"
+              position="-2 1 -5" scale="1 1 1" rotation="0 240 0"
+              animation="property: rotation; to: 0 360 0; loop: true; dur: 5000">
+    </a-entity>
 
-        <a-entity 
-            gltf-model="https://cdn.jsdelivr.net/gh/saracen7mi/stecakgojsalici@main/grbdrzave3d.glb" 
-            position="2 1 -5" 
-            scale="1 1 1" 
-            rotation="0 240 0" 
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 5000">
-        </a-entity>
+    <a-entity gltf-model="https://cdn.jsdelivr.net/gh/saracen7mi/stecakgojsalici@main/grbdrzave3d.glb"
+              position="2 1 -5" scale="1 1 1" rotation="0 240 0"
+              animation="property: rotation; to: 0 360 0; loop: true; dur: 5000">
+    </a-entity>
 
-        <!-- Dugmad za jezike -->
-        <a-entity id="eng-button" geometry="primitive: plane; height: 0.5; width: 1.5"
-                  material="color: red" position="-2.5 2 -4.9"
-                  text="value: ENG; color: white; align: center; width: 3;"
-                  class="clickable"></a-entity>
+    <!-- Dugmad za jezike -->
+    <a-entity id="eng-button" class="clickable" geometry="primitive: plane; height:0.5; width:1.5"
+              material="color:red" position="-2.5 2 -4.9"
+              text="value: ENG; color:white; align:center; width:3;">
+    </a-entity>
+    <a-entity id="deu-button" class="clickable" geometry="primitive: plane; height:0.5; width:1.5"
+              material="color:yellow" position="-1 2 -4.9"
+              text="value: DEU; color:black; align:center; width:3;">
+    </a-entity>
+    <a-entity id="ita-button" class="clickable" geometry="primitive: plane; height:0.5; width:1.5"
+              material="color:blue" position="0.5 2 -4.9"
+              text="value: ITA; color:white; align:center; width:3;">
+    </a-entity>
+    <a-entity id="tur-button" class="clickable" geometry="primitive: plane; height:0.5; width:1.5"
+              material="color:brown" position="2 2 -4.9"
+              text="value: TUR; color:white; align:center; width:3;">
+    </a-entity>
 
-        <a-entity id="deu-button" geometry="primitive: plane; height: 0.5; width: 1.5"
-                  material="color: yellow" position="-1 2 -4.9"
-                  text="value: DEU; color: black; align: center; width: 3;"
-                  class="clickable"></a-entity>
+    <!-- Tekstualni opis -->
+    <a-entity position="0 0.8 -4.9">
+      <a-text value="U naselju Gojsalići ... istorijskog identiteta."
+              color="#FFFF00" width="5.5" wrap-count="50"
+              align="center" scale="0.5 0.5 0.5">
+      </a-text>
+    </a-entity>
 
-        <a-entity id="ita-button" geometry="primitive: plane; height: 0.5; width: 1.5"
-                  material="color: blue" position="0.5 2 -4.9"
-                  text="value: ITA; color: white; align: center; width: 3;"
-                  class="clickable"></a-entity>
+    <!-- Lokacija -->
+    <a-entity id="location-link" class="clickable" position="0 -0.8 -4.9">
+      <a-text value="Lokacija:" position="-2 0 0.05" color="#000"
+              align="center" scale="1.2 1.4 1.4" letter-spacing="1">
+      </a-text>
+      <a-plane color="#FF0000" height="0.5" width="1.6" opacity="0.5" position="-0.3 0 0.06"></a-plane>
+      <a-text value="Klikni ovde" position="-0.4 0 0.06" color="#000"
+              align="center" scale="1.2 1.2 1.2" letter-spacing="1">
+      </a-text>
+    </a-entity>
 
-        <a-entity id="tur-button" geometry="primitive: plane; height: 0.5; width: 1.5"
-                  material="color: brown" position="2 2 -4.9"
-                  text="value: TUR; color: white; align: center; width: 3;"
-                  class="clickable"></a-entity>
+    <a-entity camera look-controls position="0 0 0" fov="85">
+      <a-cursor color="#FF0000" radius="0.05"></a-cursor>
+    </a-entity>
+  </a-scene>
 
-        <!-- Tekstualni opis -->
-        <a-entity position="0 0.8 -4.9">
-            <a-text value="U naselju Gojsalici, u samom centru, s desne strane puta na manjem uzvisenju, nalazi se nekropola sa steccima koja svjedoci o bogatoj istoriji ovog podrucja. Ova nekropola, koja broji cetrdeset i osam stecaka, jedna je od bolje ocuvanih u okolini, sa informacijama na postavljenoj tabli. Iako je parcela uredjena, mnogi stecci su osteceni, utonuli u zemlju ili obrastali niskim rastinjem, sto ukazuje na to da su se ljudi na ovom prostoru naseljavali jos u srednjem veku. Na ovoj nekropoli, medjutim, jedan od stecaka se izdvaja po motivu maca na krovnoj ploci, dok je postolje gotovo potpuno utonulo. Jedan od najimpresivnijih stecaka na ovom lokalitetu je sljemenjak velikih dimenzija, njegovoj ceonoj zapadnoj strani nalazi se motiv polumjeseca sa krakovima okrenutim prema zemlji, dok na krovu dominira zig-zag vrpca. Ovi stecci ne samo da su kulturno nasledje, vec i jasni dokazi da je Kladanj bio naseljen i u proslim vremenima, ostavljajuci tragove svog istorijskog identiteta."
-                     color="#FFFF00" width="5.5" wrap-count="50" align="center" scale="0.5 0.5 0.5">
-            </a-text>
-        </a-entity>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const bosnianAudio = document.getElementById('audio-bosnian');
+      const englishAudio = document.getElementById('audio-english');
+      const germanAudio = document.getElementById('audio-german');
+      const italianAudio = document.getElementById('audio-italian');
+      const turkishAudio = document.getElementById('audio-turkish');
+      const audios = [bosnianAudio, englishAudio, germanAudio, italianAudio, turkishAudio];
 
-        <!-- Google Maps dugme -->
-        <a-entity position="0 -0.8 -4.9" id="location-link" class="clickable">
-            <a-text value="Lokacija:" position="-2 0 0.05" color="#000000" align="center"
-                    scale="1.2 1.4 1.4" letter-spacing="1"></a-text>
-            <a-plane color="#FF0000" height="0.5" width="1.6" opacity="0.5" position="-0.3 0 0.06"></a-plane>
-            <a-text value="Klikni ovde" position="-0.4 0 0.06" color="#000000" align="center"
-                    scale="1.2 1.2 1.2" letter-spacing="1" class="clickable"></a-text>
-        </a-entity>
+      const stopAllAudio = () => audios.forEach(a => { a.pause(); a.currentTime = 0; });
 
-        <!-- Kamera -->
-        <a-entity camera look-controls position="0 0 0" fov="85">
-            <a-cursor color="#FF0000" radius="0.05"></a-cursor>
-        </a-entity>
-    </a-scene>
+      const playAudio = (audio) => {
+        stopAllAudio();
+        audio.play().catch(e => console.error('Play error:', e));
+      };
 
-    <!-- JavaScript -->
-<!--     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const bosnianAudio = document.getElementById('audio-bosnian');
-            const englishAudio = document.getElementById('audio-english');
-            const germanAudio = document.getElementById('audio-german');
-            const italianAudio = document.getElementById('audio-italian');
-            const turkishAudio = document.getElementById('audio-turkish');
-            const audios = [bosnianAudio, englishAudio, germanAudio, italianAudio, turkishAudio];
+      // 1) Prvi klik/touch – bosanski audio
+      const playBosnian = () => {
+        if (bosnianAudio.paused) playAudio(bosnianAudio);
+        document.removeEventListener('click', playBosnian);
+        document.removeEventListener('touchstart', playBosnian);
+      };
+      document.addEventListener('click', playBosnian, { once: true });
+      document.addEventListener('touchstart', playBosnian, { once: true });
 
-            const stopAllAudio = () => {
-                audios.forEach(audio => {
-                    audio.pause();
-                    audio.currentTime = 0;
-                });
-            };
-
-            const playAudio = (audioElement) => {
-                if (!audioElement || !audioElement.src) {
-                    console.warn('Audio nije dostupan:', audioElement?.id);
-                    return;
-                }
-                stopAllAudio();
-                audioElement.play().then(() => {
-                    console.log('Reprodukcija audio:', audioElement.id);
-                }).catch(error => {
-                    console.error('Greška pri reprodukciji:', error);
-                });
-            };
-
-            const playBosnianOnInteraction = () => {
-                if (bosnianAudio.paused) playAudio(bosnianAudio);
-                document.removeEventListener('click', playBosnianOnInteraction);
-                document.removeEventListener('touchstart', playBosnianOnInteraction);
-            };
-            document.addEventListener('click', playBosnianOnInteraction, { once: true });
-            document.addEventListener('touchstart', playBosnianOnInteraction, { once: true });
-
-            // Dugmad za jezike
-            const buttons = {
-                'eng-button': englishAudio,
-                'deu-button': germanAudio,
-                'ita-button': italianAudio,
-                'tur-button': turkishAudio
-            };
-
-            Object.keys(buttons).forEach(id => {
-                const btn = document.getElementById(id);
-                if (btn) {
-                    btn.addEventListener('click', () => playAudio(buttons[id]));
-                }
-            });
-
-            // Link za Google Maps
-            const locationLink = document.getElementById('location-link');
-            if (locationLink) {
-                locationLink.addEventListener('click', () => {
-                    window.location.href = 'https://www.google.com/maps/dir/?api=1&destination=44.260281488474156,18.728171669452628&travelmode=driving';
-                });
-            }
-
-            // Dijagnostika modela
-            document.querySelectorAll('a-entity[gltf-model]').forEach(entity => {
-                entity.addEventListener('model-loaded', () => {
-                    console.log('Model učitan:', entity.getAttribute('gltf-model'));
-                });
-                entity.addEventListener('model-error', (e) => {
-                    console.error('Greška pri modelu:', e.detail);
-                });
-            });
+      // 2) Dugmad za jezike
+      {
+        const mapBtn = { 'eng-button': englishAudio, 'deu-button': germanAudio,
+                         'ita-button': italianAudio, 'tur-button': turkishAudio };
+        Object.entries(mapBtn).forEach(([id, audio]) => {
+          document.getElementById(id).addEventListener('click', () => playAudio(audio));
         });
-    </script> -->
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const bosnianAudio = document.getElementById('audio-bosnian');
-    const englishAudio = document.getElementById('audio-english');
-    const germanAudio = document.getElementById('audio-german');
-    const italianAudio = document.getElementById('audio-italian');
-    const turkishAudio = document.getElementById('audio-turkish');
-    const audios = [bosnianAudio, englishAudio, germanAudio, italianAudio, turkishAudio];
-
-    const stopAllAudio = () => {
-      audios.forEach(aud => {
-        aud.pause();
-        aud.currentTime = 0;
-      });
-    };
-
-    const playAudio = (aud) => {
-      if (!aud || !aud.src) return console.warn('Bez audio fajla:', aud);
-      stopAllAudio();
-      aud.play().catch(e => console.error('Greška:', e));
-    };
-
-    const playBosnianOnInteraction = () => {
-      if (bosnianAudio.paused) playAudio(bosnianAudio);
-      document.body.removeEventListener('click', playBosnianOnInteraction);
-      document.body.removeEventListener('touchstart', playBosnianOnInteraction);
-    };
-
-    // OGROMNO VAŽNO: slušamo BOD SINČE KAD je DOM spreman:
-    document.body.addEventListener('click', playBosnianOnInteraction);
-    document.body.addEventListener('touchstart', playBosnianOnInteraction);
-
-    // Ostala jezika:
-    const buttons = {
-      'eng-button': englishAudio,
-      'deu-button': germanAudio,
-      'ita-button': italianAudio,
-      'tur-button': turkishAudio
-    };
-    Object.entries(buttons).forEach(([id, aud]) => {
-      const btn = document.getElementById(id);
-      if (btn) {
-        btn.classList.add('clickable');
-        btn.addEventListener('click', () => playAudio(aud));
       }
+
+      // 3) Lokacija dugme
+      document.getElementById('location-link').addEventListener('click', () => {
+        window.location.href = 'https://www.google.com/maps/dir/?api=1&destination=44.260281488474156,18.728171669452628&travelmode=driving';
+      });
+
+      // Dijagnostika modela
+      document.querySelectorAll('a-entity[gltf-model]').forEach(e=> {
+        e.addEventListener('model-loaded', ()=> console.log('Model učitan:', e.getAttribute('gltf-model')));
+        e.addEventListener('model-error', evt=> console.error('Greška model:', evt.detail));
+      });
     });
-
-    // Maps link
-    const loc = document.getElementById('location-link');
-    if (loc) loc.addEventListener('click', () => {
-      window.location.href = 'https://www.google.com/maps/dir/?api=1&destination=44.260281488474156,18.728171669452628&travelmode=driving';
-    });
-  });
-</script>
-
-
-
-
-
-
-
-    
+  </script>
 </body>
 </html>
